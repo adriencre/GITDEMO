@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+{% block content %}
+<a href="index.php?page=addProduct" class="btn btn-primary">Ajouter un Produit</a>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <h1 class="text-center">Liste des produits</h1> 
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Prix</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.getId() }}</td>
+                        <td>{{ produit.getName() }}</td>
+                        <td>{{ produit.getDescription() | raw }}</td>
+                        <td>{{ produit.getPrice() }}</td>
+                        <td>{{ produit.getType().getLabel() }}</td>
+                        <td>
+                            <a href="index.php?page=updateProduit&id={{ produit.getId() }}" class="btn btn-success"><i class="bi bi-pen-fill"></i> Modifier</a>
+                            <a href="index.php?page=deleteProduit&id={{ produit.getId() }}" class="btn btn-danger"><i class="bi bi-trash2-fill"></i> Supprimer</a>
+                            <a href="index.php?page=addReviewForm&id={{ produit.getId() }}" class="btn btn-primary">Donnez votre avis</a>
+                            <a href="index.php?page=viewReviews&id={{ produit.getId() }}" class="btn btn-info">Lire les avis</a>
+                            <a href="index.php?page=additem" class="btn btn-success">Ajouter au Panier</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

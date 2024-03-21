@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+{% block content %}
+<a href="index.php?page=addProduct" class="btn btn-primary">Ajouter un Produit</a>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <h1 class="text-center">Ajouter au Panier</h1> 
+            <form method="post" action="index.php?page=additem">
+                <div class="form-group">
+                    <label for="productId">Produit</label>
+                    <select name="productId" id="productId" class="form-control">
+                        {% for product in produits %}
+                            <option value="{{ products.getId() }}">{{ products.getName() }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cartId">Panier</label>
+                    <select name="cartId" id="cartId" class="form-control">
+                        {% for cart in carts %}
+                            <option value="{{ cart.id_cart }}">{{ cart.id_cart }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantité</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1">
+                </div>
+                <button type="submit" class="btn btn-success">Ajouter au Panier</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
